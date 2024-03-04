@@ -72,7 +72,7 @@ const CoinChart = ({ coinId, coinName }) => {
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
             <stop offset="7%" stopColor={colors.color1} stopOpacity={0.8} />
-            <stop offset="93%" stopColor={colors.white1} stopOpacity={0} />
+            <stop offset="93%" stopColor={colors.white1} stopOpacity={0.1} />
           </linearGradient>
         </defs>
         <XAxis dataKey="date" />
@@ -82,7 +82,7 @@ const CoinChart = ({ coinId, coinName }) => {
         <Area
           type="monotone"
           dataKey="price"
-          stroke={colors.color1}
+          stroke={colors.green2}
           fillOpacity={1}
           fill="url(#colorUv)"
         />

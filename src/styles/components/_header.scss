@@ -70,10 +70,10 @@ header {
         }
 
         img {
-          height: 17px;
+          height: 25px;
           object-fit: cover;
-          margin-right: 3px;
-          transform: translate(3px, -4px);
+          margin-right: 7px;
+          transform: translate(3px, -2px);
         }
       }
     }
@@ -139,6 +139,7 @@ header {
 
           &.active {
             background: $black2;
+            cursor: pointer;
           }
         }
 
