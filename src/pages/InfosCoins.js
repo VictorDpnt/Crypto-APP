@@ -5,6 +5,7 @@ import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 import LinearProgress from "@mui/joy/LinearProgress";
 import CoinChart from "../components/CoinChart";
 import StartIcon from "../components/StartIcon";
+import Historical from "../components/Historical";
 
 const InfosCoins = () => {
   const [coinData, setCoinData] = useState(null);
@@ -72,8 +73,6 @@ const InfosCoins = () => {
     } else {
       setResult(0);
     }
-
-    console.log(result);
   };
 
   return (
@@ -116,7 +115,7 @@ const InfosCoins = () => {
             <LinearProgress
               determinate
               value={percentageChange}
-              style={{ width: "100%" }}
+              style={{ width: "95%" }}
             />
             <div className="range-infos">
               <p>{formatNumber(coinData.market_data.low_24h.usd)}$US</p>
@@ -179,6 +178,29 @@ const InfosCoins = () => {
                 onChange={(e) => calculInverse(e.target.value)}
                 value={result}
               />
+            </div>
+          </div>
+          <div className="historical-container">
+            <h1>{coinData.symbol.toUpperCase()} Historical Price</h1>
+            <div className="lines">
+              <p>24h Range</p>
+              <Historical days={1} id={coinData.id} />
+            </div>
+            <div className="lines">
+              <p>7d Range</p>
+              <Historical days={7} id={coinData.id} />
+            </div>
+            <div className="lines">
+              <p>1m Range</p>
+              <Historical days={30} id={coinData.id} />
+            </div>
+            <div className="lines">
+              <p>6m Range</p>
+              <Historical days={180} id={coinData.id} />
+            </div>
+            <div className="lines">
+              <p>1y Range</p>
+              <Historical days={365} id={coinData.id} />
             </div>
           </div>
           <div className="vote-container">
@@ -257,3 +279,8 @@ const InfosCoins = () => {
 };
 
 export default InfosCoins;
+
+// https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7
+// https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365
+
+// https://api.coingecko.com/api/v3/search/trending

@@ -160,6 +160,21 @@
           }
         }
       }
+      .historical-container {
+        width: 90%;
+
+        h1 {
+          margin: 20px 0;
+        }
+        .lines {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #384a61;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+        }
+      }
       .vote-container {
         margin-top: 50px;
         width: 90%;
