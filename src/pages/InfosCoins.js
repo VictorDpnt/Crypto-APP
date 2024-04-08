@@ -6,6 +6,9 @@ import LinearProgress from "@mui/joy/LinearProgress";
 import CoinChart from "../components/CoinChart";
 import StartIcon from "../components/StartIcon";
 import Historical from "../components/Historical";
+import TrendingCoins from "../components/TrendingCoins";
+import { IoArrowBackOutline } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 
 const InfosCoins = () => {
   const [coinData, setCoinData] = useState(null);
@@ -13,8 +16,8 @@ const InfosCoins = () => {
   const [resultInverse, setResultInverse] = useState(1);
   const [percentageChange, setPercentageChange] = useState(0);
   const idUrl = window.location.pathname;
+
   const [htmlContent, setHtmlContent] = useState("");
-  // const htmlContent = `${coinData.description.en}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,9 +32,12 @@ const InfosCoins = () => {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
-  }, [idUrl]);
+  }, [idUrl, coinData]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (coinData && coinData.description && coinData.description.en) {
@@ -55,12 +61,6 @@ const InfosCoins = () => {
     return <div>Loading...</div>;
   }
 
-  // const calcul = (e) => {
-  //   setResult(formatNumber(e * coinData.market_data.current_price.usd));
-
-  //   return result;
-  // };
-
   const calculInverse = (e) => {
     setResultInverse(e / coinData.market_data.current_price.usd);
 
@@ -77,6 +77,14 @@ const InfosCoins = () => {
 
   return (
     <div className="info-container">
+      <NavLink to={"/"}>
+        <div className="back">
+          <div>
+            <IoArrowBackOutline />
+            <p>Home</p>
+          </div>
+        </div>
+      </NavLink>
       <div className="main-infos">
         <div className="left-part">
           <div className="header">
@@ -180,7 +188,7 @@ const InfosCoins = () => {
               />
             </div>
           </div>
-          <div className="historical-container">
+          {/* <div className="historical-container">
             <h1>{coinData.symbol.toUpperCase()} Historical Price</h1>
             <div className="lines">
               <p>24h Range</p>
@@ -202,7 +210,7 @@ const InfosCoins = () => {
               <p>1y Range</p>
               <Historical days={365} id={coinData.id} />
             </div>
-          </div>
+          </div> */}
           <div className="vote-container">
             <h3>
               The community is bullish about {coinData.name} (
@@ -274,13 +282,71 @@ const InfosCoins = () => {
           )}
         </div>
       </div>
+      <div className="global-price-container">
+        <h1>Global Bitcoin Prices</h1>
+        <div className="global-price">
+          <div className="line">
+            <div className="monnaie-symb">
+              <p className="symbol">{coinData.symbol.toUpperCase()} / USD</p>
+              <p className="monnaie">US Dollar</p>
+            </div>
+            <p className="price">
+              $ {formatNumber(coinData.market_data.current_price.usd)}
+            </p>
+          </div>
+          <div className="line">
+            <div className="monnaie-symb">
+              <p className="symbol">{coinData.symbol.toUpperCase()} / GBP</p>
+              <p className="monnaie">Britsh Pound Sterling</p>
+            </div>
+            <p className="price">
+              £ {formatNumber(coinData.market_data.current_price.gbp)}
+            </p>
+          </div>
+          <div className="line">
+            <div className="monnaie-symb">
+              <p className="symbol">{coinData.symbol.toUpperCase()} / EUR</p>
+              <p className="monnaie">Euro</p>
+            </div>
+            <p className="price">
+              € {formatNumber(coinData.market_data.current_price.eur)}
+            </p>
+          </div>
+          <div className="line">
+            <div className="monnaie-symb">
+              <p className="symbol">{coinData.symbol.toUpperCase()} / CAD</p>
+              <p className="monnaie">Canadian Dollar</p>
+            </div>
+            <p className="price">
+              CA$ {formatNumber(coinData.market_data.current_price.cad)}
+            </p>
+          </div>
+          <div className="line">
+            <div className="monnaie-symb">
+              <p className="symbol">{coinData.symbol.toUpperCase()} / INR</p>
+              <p className="monnaie">Indian Rupee</p>
+            </div>
+            <p className="price">
+              ₹ {formatNumber(coinData.market_data.current_price.inr)}
+            </p>
+          </div>
+          <div className="line">
+            <div className="monnaie-symb">
+              <p className="symbol">{coinData.symbol.toUpperCase()}/ AUD</p>
+              <p className="monnaie">Australian Dollar</p>
+            </div>
+            <p className="price">
+              A$ {formatNumber(coinData.market_data.current_price.aud)}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="trending">
+        <h1>Trending Coins</h1>
+        <TrendingCoins name={coinData.name} />
+      </div>
     </div>
   );
 };
 
 export default InfosCoins;
-
-// https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7
-// https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365
-
-// https://api.coingecko.com/api/v3/search/trending

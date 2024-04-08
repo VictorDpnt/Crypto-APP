@@ -36,7 +36,7 @@ const Historical = ({ days, id }) => {
   return (
     <div className="prices">
       <p>
-        $ {numberWithSeparator(smallestPrice.toFixed(2))} - ${" "}
+        $ {numberWithSeparator(smallestPrice.toFixed(2))} - $
         {numberWithSeparator(largestPrice.toFixed(2))}
       </p>
     </div>

@@ -1,15 +1,37 @@
 .info-container {
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+
+  .back {
+    margin-bottom: 50px;
+    div {
+      display: flex;
+      align-items: flex-start;
+      align-items: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #99abc1;
+      width: fit-content;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      p {
+        margin-left: 10px;
+      }
+    }
+  }
   .main-infos {
     display: grid;
     grid-template-columns: 30% 70%;
+    height: fit-content;
 
     .left-part {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-
-      height: 100vh;
 
       .header {
         width: 90%;
@@ -328,6 +350,98 @@
             color: white;
             text-decoration: underline;
           }
+        }
+      }
+    }
+  }
+
+  .global-price-container {
+    margin-top: 80px;
+    width: 100%;
+
+    .global-price {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-row-gap: 15px;
+      grid-column-gap: 30px;
+
+      .line {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 10px;
+        width: 100%;
+        border-bottom: 1px solid #384a61;
+        padding-bottom: 8px;
+
+        .monnaie-symb {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          .symbol {
+            margin-right: 20px;
+            font-size: 1.1rem;
+          }
+          .monnaie {
+            color: #becbda;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+
+  .trending {
+    margin-top: 80px;
+  }
+
+  .trendingCoins-container {
+    margin-top: 10px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(5, 1fr);
+
+    .card-container {
+      border: solid 2px #384a61;
+      border-radius: 10px;
+      padding: 20px 40px;
+      margin: 10px 0;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: 0.1s;
+
+      &:hover {
+        background-color: #384a6176;
+      }
+
+      img {
+        width: 30px;
+      }
+
+      .name {
+        font-size: large;
+        color: #becbda;
+      }
+
+      .price-evol {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: larger;
+
+        .price {
+          margin-right: 10px;
+          color: whitesmoke;
+        }
+        .arrow-green {
+          color: $green1;
+          margin: 0 3px 0 10px;
+          padding-top: 5px;
+        }
+        .arrow-red {
+          color: $red1;
+          margin: 0 3px 0 10px;
+          padding-top: 5px;
         }
       }
     }

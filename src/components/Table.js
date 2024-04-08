@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableLine from "./TableLine";
 import ToTop from "./ToTop";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ const Table = ({ coinsData }) => {
   const [rangeNumber, setRangeNumber] = useState(100);
   const showStable = useSelector((state) => state.stableReducer.showStable);
   const showFavList = useSelector((state) => state.listReducer.showList);
+  const [scrolled, setScrolled] = useState(false);
 
   const tableHeader = [
     "Prix",
@@ -23,37 +24,25 @@ const Table = ({ coinsData }) => {
     "ATH",
   ];
 
-  const excludeCoin = (coin) => {
-    if (
-      coin === "usdt" ||
-      coin === "usdc" ||
-      coin === "busd" ||
-      coin === "dai" ||
-      coin === "ust" ||
-      coin === "mim" ||
-      coin === "tusd" ||
-      coin === "usdp" ||
-      coin === "usdn" ||
-      coin === "fei" ||
-      coin === "tribe" ||
-      coin === "gusd" ||
-      coin === "frax" ||
-      coin === "lusd" ||
-      coin === "husd" ||
-      coin === "ousd" ||
-      coin === "xsgd" ||
-      coin === "usdx" ||
-      coin === "eurs"
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 145) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="table-container">
-      <ul className="table-header">
+      <ul className={scrolled ? "table-header active" : "table-header"}>
         <div className="range-container">
           <span>
             Top{" "}
