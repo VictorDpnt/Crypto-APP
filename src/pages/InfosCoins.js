@@ -36,7 +36,7 @@ const InfosCoins = () => {
       }
     };
     fetchData();
-  }, [idUrl]);
+  }, [idUrl, coinData]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -83,16 +83,20 @@ const InfosCoins = () => {
     return <LinearProgress color="secondary" />;
   }
 
+  const handleClick = () => {
+    window.history.back();
+  };
+
   return (
     <div className="info-container">
-      <NavLink to={"/"}>
-        <div className="back">
-          <div>
-            <IoArrowBackOutline />
-            <p>Home</p>
-          </div>
+      {/* <NavLink to={"/"}> */}
+      <div className="back">
+        <div onClick={handleClick}>
+          <IoArrowBackOutline />
+          <p>Home</p>
         </div>
-      </NavLink>
+      </div>
+      {/* </NavLink> */}
       <div className="main-infos">
         <div className="left-part">
           <div className="header">

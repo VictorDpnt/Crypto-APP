@@ -72,19 +72,28 @@ const CoinChart = ({ coinId, coinName, coins }) => {
         }`
       )
       .then((res) => {
-        for (let i = 0; i < res.data.prices.length; i++) {
-          let price = res.data.prices[i][1];
+        if (res.data.prices && res.data.prices.length > 0) {
+          for (let i = 0; i < res.data.prices.length; i++) {
+            let price = res.data.prices[i][1];
 
-          dataArray.push({
-            date: new Date(res.data.prices[i][0]).toLocaleDateString(),
-            price: price < "50" ? price : parseInt(price),
-          });
+            dataArray.push({
+              date: new Date(res.data.prices[i][0]).toLocaleDateString(),
+              price: price < "50" ? price : parseInt(price),
+            });
+          }
+          setCoinData(dataArray);
+        } else {
+          console.log(`No data available for ${duration} days.`);
+          setCoinData([]); // Définir les données comme un tableau vide
         }
-        setCoinData(dataArray);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setCoinData([]); // Définir les données comme un tableau vide en cas d'erreur
       });
 
     colorChart();
-  }, [coinId, duration, theme]);
+  }, [coinId, duration, theme, coinData]);
 
   return (
     <div className="coin-chart">

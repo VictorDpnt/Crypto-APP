@@ -38,6 +38,16 @@
       animation: navAnim 0.3s forwards;
       border-bottom: 1px solid rgb(77, 77, 77);
 
+      @media screen and (max-width: 1050px) {
+        width: 960px;
+      }
+      @media screen and (max-width: 800px) {
+        width: 710px;
+      }
+      @media screen and (max-width: 500px) {
+        width: 366px;
+      }
+
       @keyframes navAnim {
         to {
           opacity: 1;

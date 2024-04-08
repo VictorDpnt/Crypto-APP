@@ -89,4 +89,11 @@ label {
 
 .app-container {
   padding: 0 100px;
+
+  @media screen and (max-width: 1050px) {
+    padding: 0 30px;
+  }
+  @media screen and (max-width: 375px) {
+    padding: 0 5px;
+  }
 }
