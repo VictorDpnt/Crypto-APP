@@ -15,6 +15,7 @@ const InfosCoins = () => {
   const [result, setResult] = useState();
   const [resultInverse, setResultInverse] = useState(1);
   const [percentageChange, setPercentageChange] = useState(0);
+  const [loading, setLoading] = useState(true);
   const idUrl = window.location.pathname;
 
   const [htmlContent, setHtmlContent] = useState("");
@@ -28,12 +29,14 @@ const InfosCoins = () => {
         const data = response.data;
         setCoinData(data);
         calculatePercentageChange(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
     fetchData();
-  }, [idUrl, coinData]);
+  }, [idUrl]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,6 +77,11 @@ const InfosCoins = () => {
       setResult(0);
     }
   };
+
+  if (loading) {
+    // Si les données sont en cours de chargement, afficher l'indicateur de chargement
+    return <LinearProgress color="secondary" />;
+  }
 
   return (
     <div className="info-container">
