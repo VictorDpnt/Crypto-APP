@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 const InfosCoins = () => {
   const [coinData, setCoinData] = useState(null);
   const [result, setResult] = useState();
-  const [resultInverse, setResultInverse] = useState(1);
+  const [resultInverse, setResultInverse] = useState();
   const [percentageChange, setPercentageChange] = useState(0);
   const [loading, setLoading] = useState(true);
   const idUrl = window.location.pathname;
@@ -66,11 +66,10 @@ const InfosCoins = () => {
 
   const calculInverse = (e) => {
     setResultInverse(e / coinData.market_data.current_price.usd);
-
-    console.log(resultInverse);
   };
 
   const calcul = (e) => {
+    setResult(coinData.market_data.current_price.usd);
     if (/^\d+$/.test(e)) {
       setResult(formatNumber(e * coinData.market_data.current_price.usd));
     } else {
@@ -83,20 +82,20 @@ const InfosCoins = () => {
     return <LinearProgress color="secondary" />;
   }
 
-  const handleClick = () => {
-    window.history.back();
-  };
+  // const handleClick = () => {
+  //   window.history.back();
+  // };
 
   return (
     <div className="info-container">
-      {/* <NavLink to={"/"}> */}
-      <div className="back">
-        <div onClick={handleClick}>
-          <IoArrowBackOutline />
-          <p>Home</p>
+      <NavLink to={"/"}>
+        <div className="back">
+          <div>
+            <IoArrowBackOutline />
+            <p>Home</p>
+          </div>
         </div>
-      </div>
-      {/* </NavLink> */}
+      </NavLink>
       <div className="main-infos">
         <div className="left-part">
           <div className="header">
@@ -183,19 +182,33 @@ const InfosCoins = () => {
             <h1>Convertisseur {coinData.symbol.toUpperCase()}</h1>
             <div className="inputs">
               <input
+                onClick={() => {
+                  setResult(0);
+                  setResultInverse(null);
+                }}
                 type="text"
                 defaultValue={1}
-                onChange={(e) => calcul(e.target.value)}
+                onChange={(e) => {
+                  setResultInverse(e.target.value);
+                  calcul(e.target.value);
+                }}
                 value={resultInverse}
               />
               <p className="symbole">{coinData.symbol.toUpperCase()}</p>
               <p className="devise">USD</p>
               <input
+                onClick={() => {
+                  setResult(0);
+                  setResultInverse(null);
+                }}
                 type="text"
                 defaultValue={formatNumber(
                   coinData.market_data.current_price.usd
                 )}
-                onChange={(e) => calculInverse(e.target.value)}
+                onChange={(e) => {
+                  calculInverse(e.target.value);
+                  setResult(e.target.value);
+                }}
                 value={result}
               />
             </div>

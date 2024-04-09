@@ -96,33 +96,101 @@ header {
       margin-top: 10px;
 
       .table-filters-container {
-        display: flex;
+        display: grid;
+        grid-template-columns: 50% 25% 25%;
         background: $black1;
         border-radius: 10px;
         padding: 4px;
         justify-content: space-between;
         border-bottom: 1px solid $color1;
 
-        .stable-checkbox-container {
+        .search-container {
           display: flex;
+          justify-content: flex-start;
           align-items: center;
+          position: relative;
 
-          #stableCoin {
-            display: none;
+          .input-container {
+            width: 95%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
 
-            &:checked {
-              ~ label {
-                background: $black2;
-              }
+            input {
+              width: 100%;
+              background: none;
+              border: none;
+              border-bottom: 1px solid #99abc1;
+              margin-right: 6px;
+              border-radius: 5px;
+              color: whitesmoke;
+              padding: 3px;
+              height: 25px;
             }
-            ~ label {
-              transition: 0.15s;
-              padding: 2px 10px;
-              border-radius: 10px;
+          }
+
+          .window-search {
+            z-index: 1000;
+            position: absolute;
+            width: 81%;
+            height: 200px;
+            background-color: #99abc1;
+            top: 30px;
+            border-bottom-right-radius: 6px;
+            border-bottom-left-radius: 6px;
+            overflow-y: scroll;
+            // padding: 5px;
+
+            @media screen and (max-width: 500px) {
+              top: 40px;
+              width: 78%;
+            }
+
+            .result-search {
+              color: #1d2733;
+              display: grid;
+              grid-template-columns: 90% 10%;
+              align-items: center;
+              // margin-bottom: 8px;
+              border-bottom: 1px solid #1d2733;
+              padding: 8px;
               cursor: pointer;
 
               &:hover {
-                filter: brightness(130%);
+                filter: brightness(110%);
+                background-color: #b0c3d7;
+              }
+
+              .left {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .coins-name {
+                  font-size: 0.9rem;
+                  margin: 0 5px;
+                }
+
+                .symbole {
+                  font-size: 0.6rem;
+                }
+              }
+
+              .right {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                p {
+                  font-size: 0.6rem;
+                  background-color: #1d2733;
+                  padding: 3px;
+                  border-radius: 5px;
+                  width: 25px;
+                  color: #99abc1;
+                  text-align: center;
+                }
               }
             }
           }
@@ -130,6 +198,9 @@ header {
 
         .no-list-btn,
         .fav-list {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           transition: 0.15s;
           border-radius: 10px;
           padding: 2px 10px;
@@ -150,7 +221,7 @@ header {
 
           img {
             height: 14px;
-            margin-left: 5px;
+            margin-left: 8px;
           }
         }
       }

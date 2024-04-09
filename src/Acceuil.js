@@ -4,6 +4,7 @@ import GlobalChart from "./components/GlobalChart";
 import axios from "axios";
 import Table from "./components/Table";
 import ToTop from "./components/ToTop";
+import Footer from "./components/Footer";
 
 const Acceuil = () => {
   const [coinsData, setCoinsData] = useState([]);
@@ -17,13 +18,14 @@ const Acceuil = () => {
   }, []);
 
   return (
-    <div className="app-container">
+    <div className="app-container" id="app-container">
       <header>
         <HeaderInfos />
         <GlobalChart coinsData={coinsData} />
       </header>
       <Table coinsData={coinsData} />
       <ToTop />
+      <Footer />
     </div>
   );
 };

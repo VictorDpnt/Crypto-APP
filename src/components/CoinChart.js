@@ -93,7 +93,7 @@ const CoinChart = ({ coinId, coinName, coins }) => {
       });
 
     colorChart();
-  }, [coinId, duration, theme, coinData]);
+  }, [coinId, duration]);
 
   return (
     <div className="coin-chart">
