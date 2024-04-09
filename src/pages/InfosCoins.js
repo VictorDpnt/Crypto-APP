@@ -9,6 +9,8 @@ import Historical from "../components/Historical";
 import TrendingCoins from "../components/TrendingCoins";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
+import ToTop from "../components/ToTop";
+import { useLocation } from "react-router-dom";
 
 const InfosCoins = () => {
   const [coinData, setCoinData] = useState(null);
@@ -16,7 +18,9 @@ const InfosCoins = () => {
   const [resultInverse, setResultInverse] = useState();
   const [percentageChange, setPercentageChange] = useState(0);
   const [loading, setLoading] = useState(true);
-  const idUrl = window.location.pathname;
+  // const idUrl = window.location.pathname;
+  const location = useLocation();
+  const [idUrl, setIdUrl] = useState(location.pathname);
 
   const [htmlContent, setHtmlContent] = useState("");
 
@@ -36,11 +40,15 @@ const InfosCoins = () => {
       }
     };
     fetchData();
-  }, [idUrl, coinData]);
+  }, [idUrl]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [idUrl]);
+
+  useEffect(() => {
+    setIdUrl(location.pathname);
+  }, [location]);
 
   useEffect(() => {
     if (coinData && coinData.description && coinData.description.en) {
@@ -370,6 +378,7 @@ const InfosCoins = () => {
         <h1>Trending Coins</h1>
         <TrendingCoins name={coinData.name} />
       </div>
+      <ToTop />
     </div>
   );
 };

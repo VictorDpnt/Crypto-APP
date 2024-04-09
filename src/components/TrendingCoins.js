@@ -3,7 +3,6 @@ import axios from "axios";
 import PercentChange from "../components/PercentChange";
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
-
 const TrendingCoins = ({ name }) => {
   const [trendingData, setTrendingData] = useState(null);
 

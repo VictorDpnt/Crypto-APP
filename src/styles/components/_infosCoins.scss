@@ -463,6 +463,7 @@
     display: grid;
     justify-content: space-between;
     grid-template-columns: repeat(5, 1fr);
+    margin-bottom: 20px;
 
     @media screen and (max-width: 800px) {
       display: grid;
@@ -479,7 +480,7 @@
       padding: 20px 40px;
       margin: 10px 0;
       margin-right: 10px;
-      cursor: pointer;
+
       transition: 0.1s;
 
       &:hover {
